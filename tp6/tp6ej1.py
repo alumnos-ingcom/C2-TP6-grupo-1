@@ -4,63 +4,59 @@
 # UNRN Andina - Introducción a la Ingenieria en Computación
 ################
 
-def analisis_anagrama(lista_palabras):
-    
-    diccionario_palabras = {}
+def analisis_anagrama(palabra1, palabra2):
+    '''Funcion para analizar posibles anagramas'''
 
-    for palabra in lista_palabras: 
+    dict_palabra1 = {}
+    dict_palabra2 = {}
 
-        palabra_diseccionadas = {}
+    for letra in palabra1:
 
-        for letra in palabra:
-            
-            if letra != ' ':
-                palabra_diseccionadas[letra.lower()] = 1
+        if letra != '':
 
-        diccionario_palabras[palabra] = palabra_diseccionadas
-
-    
-    for letra in diccionario_palabras[lista_palabras[0]].items():
-
-        valor_letra = letra[1]
-        letra = letra[0]
-
-        for palabra_comparativa in diccionario_palabras.values():
-
-            for letra_comparativa in palabra_comparativa.items():
-
-                valor_letra_comparativa = letra_comparativa[1]
-                letra_comparativa = letra_comparativa[0]
-
-                if letra_comparativa == letra and valor_letra_comparativa != valor_letra:
-
-                    return False
-
-            
+            if dict_palabra1.get(letra) == None:        
                 
+                dict_palabra1[letra] = 1
+
+            else:
+            
+                dict_palabra1[letra] += 1
+
+
+    for letra in palabra2:
         
+        if letra != '':
+
+            if dict_palabra2.get(letra) == None:        
+                
+                dict_palabra2[letra] = 1
+
+            else:
+            
+                dict_palabra2[letra] += 1
+
+    '''Chequeo si la letra y la cantidad de veces que aparece es la misma'''
+    for letra in dict_palabra1:
+
+        if dict_palabra1.get(letra) != dict_palabra2.get(letra):
+
+            return False
+
     return True
+
+        
+            
     
 
 
 def principal():
     """Toda la interacción con el usuario va acá"""
     
-    bucle = True
-    lista_palabras = []
-
-    while bucle:
-
-        palabra = input('Ingrese una palabra: ')
-        lista_palabras.append(palabra)
-
-        opcion = input('ingresar otro palabra? s/n: ')
-            
-        if opcion == 'n':
-            
-            bucle = False
+    palabra1 = input('Ingrese una palabra: ')
+    palabra2 = input('Ingrese otra palabra: ')
     
-    es_anagrama = analisis_anagrama(lista_palabras)
+    es_anagrama = analisis_anagrama(palabra1, palabra2)
+    
     print(es_anagrama)
 
 
